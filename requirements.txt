@@ -1,0 +1,5 @@
+flask
+marker-pdf
+torch
+PyPDF2
+PyMuPDF

@@ -1,0 +1,4 @@
+*
+!*.py
+!req*txt
+!.gitignore
