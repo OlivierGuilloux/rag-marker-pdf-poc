@@ -14,8 +14,11 @@ jobs:
       run: docker build . --file Dockerfile --tag rag-marker-pdf-poc:$(date +%Y%m%d)
     - name: Tag the Docker image
       run: docker tag rag-marker-pdf-poc:$(date +%Y%m%d) avelgornog/rag-marker-pdf-poc:latest
-    - name: Login to DockerHub Registry
-      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
     - name: Push to DockerHub
       run: docker push avelgornog/rag-marker-pdf-poc:latest
     - name: Tag with version
