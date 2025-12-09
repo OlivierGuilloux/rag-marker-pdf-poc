@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag rag-marker-pdf-poc:$(date +%Y%m%d)
+    - name: Tag the Docker image
+      run: docker tag rag-marker-pdf-poc:$(date +%Y%m%d) avelgornog/rag-marker-pdf-poc:latest
+    - name: Login to DockerHub Registry
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+    - name: Push to DockerHub
+      run: docker push avelgornog/rag-marker-pdf-poc:latest
+    - name: Tag with version
+      run: docker tag avelgornog/rag-marker-pdf-poc:latest avelgornog/rag-marker-pdf-poc:${{ github.ref_name }}
+    - name: Push to DockerHub
+      run: docker push avelgornog/rag-marker-pdf-poc:${{ github.ref_name }}

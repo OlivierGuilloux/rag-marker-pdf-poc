@@ -1,4 +1,6 @@
-*
+/*
 !*.py
 !req*txt
 !.gitignore
+!.github
+!Dockerfile
