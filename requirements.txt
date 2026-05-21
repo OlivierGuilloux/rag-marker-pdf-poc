@@ -1,5 +1,7 @@
 flask
-marker-pdf
+#marker-pdf
 torch
 PyPDF2
 PyMuPDF
+pymilvus>=2.6.4
+requests
